@@ -1,5 +1,5 @@
 import styles from "./imageForm.module.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 export const ImageForm = ({
   updateIntent,
@@ -26,16 +26,16 @@ export const ImageForm = ({
     imageUrlInput.current.value = "";
   };
 
-  const handleDefaultValues = () => {
+  const handleDefaultValues = useCallback(() => {
     imageTitleInput.current.value = updateIntent.title;
     imageUrlInput.current.value = updateIntent.url;
-  };
+  }, [updateIntent]);
 
   useEffect(() => {
     if (updateIntent) {
       handleDefaultValues();
     }
-  }, [updateIntent]);
+  }, [updateIntent, handleDefaultValues]);
 
   return (
     <div className={styles.imageForm}>

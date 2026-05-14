@@ -1,5 +1,5 @@
 import styles from "./imageList.module.css";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 import Spinner from "react-spinner-material";
 
@@ -35,11 +35,11 @@ export const ImagesList = ({ albumId, albumName, onBack }) => {
   const searchInput = useRef();
 
   // async function
-  const getImages = async () => {
+  const getImages = useCallback(async () => {
     setLoading(true);
     const imagesRef = collection(db, "albums", albumId, "images");
     const imagesSnapshot = await getDocs(
-      query(imagesRef, orderBy("created", "desc"))
+      query(imagesRef, orderBy("created", "desc")),
     );
     const imagesData = imagesSnapshot.docs.map((doc) => ({
       id: doc.id,
@@ -48,11 +48,11 @@ export const ImagesList = ({ albumId, albumName, onBack }) => {
     setImages(imagesData);
     IMAGES = imagesData;
     setLoading(false);
-  };
+  }, [albumId]);
 
   useEffect(() => {
     getImages();
-  }, []);
+  }, [getImages]);
 
   const [addImageIntent, setAddImageIntent] = useState(false);
   const [imgLoading, setImgLoading] = useState(false);
