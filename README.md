@@ -133,19 +133,24 @@ const firebaseConfig = {
 This project can be deployed on Netlify.
 
 ```bash
-npm test
+https://photopholio123.netlify.app/
 ```
 
 ---
 
 ## 📸 Screenshots
 
-Example:
+## Home Page
 
-- Home Page
-- Albums Section
-- Image Gallery
-- Carousel Preview
+![Home Page](./screenshots/Home.png)
+
+## Albums Section
+
+![Albums](./screenshots/createAlbum.png)
+
+## Add image to album
+
+![Add Image](./screenshots/addImageToAlbum.png)
 
 ---
 
